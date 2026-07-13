@@ -11,8 +11,8 @@ def call (Map configMap){
                 COURSE = 'Jenkins'
                 appVersion = ""
                 ACC_ID = "367012942501"
-                PROJECT = "roboshop"
-                COMPONENT = "catalogue"
+                PROJECT = configMap.get("project")
+                COMPONENT = configMap.get("component")
             }
 
             options {
