@@ -31,7 +31,7 @@ pipeline {
                     script {
                         sh """
                             aws eks update-kubeconfig --region us-east-1 --name ellamma-${PROJECT}-${deploy_to}
-                            kubectl get pods
+                            kubectl get nodes
                         """
                     }
                 }
