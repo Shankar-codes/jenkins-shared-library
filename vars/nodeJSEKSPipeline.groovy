@@ -142,7 +142,11 @@ def call (Map configMap){
                         script{
                             build job: '../catalogue-deploy',
                                 wait: true, // wait for completion
-                                propagate: false // Propagate status
+                                propagate: false, // Propagate status
+                                parameters: [
+                                    string(name: 'appVersion', value: "${appVersion}")
+                                    string(name: 'deploy_to', value: "dev")
+                                    ]
                         }
                     }
                 }
