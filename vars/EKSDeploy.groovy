@@ -11,8 +11,8 @@ def call (Map configMap){
             appVersion = configMap.get("appVersion")
             deploy_to = configMap.get("deploy_to")
             ACC_ID = "367012942501"
-            PROJECT = "roboshop"
-            COMPONENT = "catalogue"
+            PROJECT = configMap.get("project")
+            COMPONENT = configMap.get("component")
         }
 
         options {
