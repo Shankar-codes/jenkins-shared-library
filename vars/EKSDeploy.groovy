@@ -33,7 +33,7 @@ def call (Map configMap){
                             sh """
                                 aws eks update-kubeconfig --region us-east-1 --name ellamma-${PROJECT}-${deploy_to}
                                 kubectl get nodes
-                                sed -i "s/IMAGE_VERSION/${appVersion}/g"
+                                sed -i "s/IMAGE_VERSION/${appVersion}/g" values.yaml
                             """
                         }
                     }
