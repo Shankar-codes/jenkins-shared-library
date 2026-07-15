@@ -43,6 +43,15 @@ def call (Map configMap){
                 }
             }
 
+            stage("Function test") {
+                steps{
+                    script {
+                        sh """
+                            echo "Functional tests in DEV environment"
+                        """
+                    }
+                }
+            }
         }
         post { 
             always { 
