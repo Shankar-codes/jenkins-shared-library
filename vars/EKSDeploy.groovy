@@ -31,9 +31,11 @@ def call (Map configMap){
                     withAWS(region:'us-east-1',credentials:'aws-creds'){
                         script {
                             sh """
+                                set -e
                                 aws eks update-kubeconfig --region us-east-1 --name ellamma-${PROJECT}-${deploy_to}
                                 kubectl get nodes
                                 sed -i "s/IMAGE_VERSION/${appVersion}/g" values.yaml
+                                helm upgrade --install ${COMPONENT} -f values-${deploy_to} -n ellamma-ecommerce --atomic --wait --timeout=5m
                             """
                         }
                     }
