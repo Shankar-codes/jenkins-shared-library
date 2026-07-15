@@ -184,7 +184,52 @@ def call (Map configMap){
                     cleanWs()
                 }
                 success{
-                    echo "Build and Test completed successfully!"
+                    script {
+                        withCredentials([string(credentialsId: 'slack-token', variable: 'SLACK_WEBHOOK')]) {
+
+                            def payload = """
+                            {
+                            "attachments": [
+                                {
+                                "color": "#2eb886",
+                                "title": "✅ Jenkins Build Successful",
+                                "fields": [
+                                    {
+                                    "title": "Job Name",
+                                    "value": "${env.JOB_NAME}",
+                                    "short": true
+                                    },
+                                    {
+                                    "title": "Build Number",
+                                    "value": "${env.BUILD_NUMBER}",
+                                    "short": true
+                                    },
+                                    {
+                                    "title": "Status",
+                                    "value": "SUCCESS",
+                                    "short": true
+                                    },
+                                    {
+                                    "title": "Build URL",
+                                    "value": "${env.BUILD_URL}",
+                                    "short": false
+                                    }
+                                ],
+                                "footer": "Jenkins CI",
+                                "ts": ${System.currentTimeMillis() / 1000}
+                                }
+                            ]
+                            }
+                            """
+
+                            sh """
+                            curl -X POST \
+                            -H 'Content-type: application/json' \
+                            --data '${payload}' \
+                            ${SLACK_WEBHOOK}
+                            """
+                        }
+                    }
                 }
                 failure{
                     echo "Build or Test failed!"
