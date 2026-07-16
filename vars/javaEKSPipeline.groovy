@@ -167,15 +167,6 @@ def call (Map configMap){
                 //         }
                 //     }
                 // }
-                stage('Deploy') {
-                    when { 
-                        expression { "$params.DEPLOY" == "true" }
-                        }
-
-                    steps {
-                        echo "Deploying..."
-                    }
-                }
 
             }
             post { 
