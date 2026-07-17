@@ -46,29 +46,7 @@ def call (Map configMap){
                         """
                     }
                 }
-        // this is sonar qube SAST(static application security testing) stage.
-            /* stage('Sonar Scan') {
-                    environment {
-                        def scannerHome = tool 'sonar-8.0'
-                    }
-                    steps {
-                        script {
-                            // sonarqube server name is sonar-server. this is configured in jenkins global tool configuration. using token for authentication. token is generated from sonarqube server.
-                            withSonarQubeEnv('sonar-server') {
-                                sh "${scannerHome}/bin/sonar-scanner"
-                            }
-                    }
-                }
-                stage('Quality Gate') {
-                    steps {
-                        timeout(time: 1, unit: 'HOURS') {
-                            // Wait for the quality gate status
-                            // abortPipeline: true will fail the Jenkins job if the quality gate is 'FAILED'
-                            waitForQualityGate abortPipeline: true 
-                        }
-                    }
-                }*/
-
+        
                 stage('Dependabot Security Gate')
                 {
                     when {
