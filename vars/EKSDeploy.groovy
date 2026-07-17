@@ -39,6 +39,9 @@ def call (Map configMap){
                                 sed -i "s/IMAGE_VERSION/${appVersion}/g" values.yaml
                                 cat values.yaml
                                 echo
+                                echo "appVersion=${appVersion}"
+                                cat values.yaml
+                                cat values-dev.yaml
                                 helm upgrade --install ${COMPONENT} -f values-${deploy_to}.yaml -n ellamma-ecommerce --atomic --wait --timeout=5m .
                             """
                         }
